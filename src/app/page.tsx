@@ -48,6 +48,7 @@ export default function Component() {
 
         <div>
           <Button
+            disabled={!apiKey || !!roomID}
             onClick={async () => {
               try {
                 if (!apiKey) toast.error("Please enter your API Key");
@@ -64,13 +65,16 @@ export default function Component() {
           </Button>
         </div>
 
-        <div className="mt-4 p-4 bg-zinc-600 text-slate-200 bg-blur-lg rounded-md">
+        <div className="mt-4  bg-zinc-600 text-slate-200 bg-blur-lg rounded-md">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-medium">
-              {roomID ? roomID : "RoomID"}
-            </h3>
+            <input
+              value={roomID}
+              onChange={(e) => setRoomID(e.target.value)}
+              className="text-lg font-medium p-4 flex-1 bg-transparent outline-none text-slate-200"
+              placeholder="Enter RoomID or Generate one!"
+            />
             <button
-              className="flex items-center justify-center w-8 h-8 bg-zinc-500 text-slate-300 rounded-full"
+              className="flex items-center justify-center w-8 h-8 bg-zinc-500 text-slate-300 rounded-full mx-4"
               onClick={() => {
                 navigator.clipboard.writeText(roomID);
                 toast.success("RoomId copied again!");

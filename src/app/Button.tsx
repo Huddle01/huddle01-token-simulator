@@ -1,15 +1,14 @@
 "use client";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  onClick: () => void;
 }
 
-export const Button: React.FC<ButtonProps> = ({ children, onClick }) => {
+export const Button: React.FC<ButtonProps> = ({ children, ...rest }) => {
   return (
     <button
-      className="w-full h-12 bg-blue-500 text-white rounded-md"
-      onClick={onClick}
+      className="disabled:opacity-50 w-full h-12 bg-blue-500 text-white rounded-md"
+      {...rest}
     >
       {children}
     </button>
